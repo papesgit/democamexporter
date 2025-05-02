@@ -1,0 +1,19 @@
+# Executables
+*.exe
+*.dll
+*.so
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Go modules
+/go.sum
+/go.mod
+
+# IDEs
+.vscode/
+*.iml
+
+# macOS
+.DS_Store
