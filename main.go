@@ -128,6 +128,7 @@ func openCSV(path string) (*os.File, *csv.Writer) {
 		"tick", "player_name",
 		"pos_x", "pos_y", "pos_z",
 		"view_dir_x", "view_dir_y",
+		"is_ducking", "is_ducking_in_progress", "is_unducking_in_progress", "is_standing",
 	})
 	return file, writer
 }
@@ -141,6 +142,13 @@ func closeCSV(file *os.File, writer *csv.Writer) {
 	}
 }
 
+func boolToIntString(b bool) string {
+	if b {
+		return "1"
+	}
+	return "0"
+}
+
 func writePlayerData(writer *csv.Writer, tick int, player *common.Player) {
 	pos := player.Position()
 
@@ -152,5 +160,9 @@ func writePlayerData(writer *csv.Writer, tick int, player *common.Player) {
 		fmt.Sprintf("%.2f", pos.Z),
 		fmt.Sprintf("%.4f", player.ViewDirectionX()),
 		fmt.Sprintf("%.4f", player.ViewDirectionY()),
+		boolToIntString(player.IsDucking()),
+		boolToIntString(player.IsDuckingInProgress()),
+		boolToIntString(player.IsUnDuckingInProgress()),
+		boolToIntString(player.IsStanding()),
 	})
 }
